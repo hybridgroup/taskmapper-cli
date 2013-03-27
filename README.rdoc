@@ -34,11 +34,11 @@ This is the default operation on projects. It will list all the projects for a g
 
   tm project --list=all --format=table
 
-{<img src="http://dl.dropbox.com/u/576024/2013-03-27-173542_952x116_scrot.png" />}
+http://dl.dropbox.com/u/576024/2013-03-27-173542_952x116_scrot.png
 
   tm project --list=single --search-attribute='name:Project' 
 
-{<img src="http://dl.dropbox.com/u/576024/2013-03-27-173642_842x113_scrot.png" />}
+http://dl.dropbox.com/u/576024/2013-03-27-173642_842x113_scrot.png"
 
 
 For more help 
