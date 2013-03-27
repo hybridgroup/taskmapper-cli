@@ -8,6 +8,8 @@ require 'tm/format/pretty'
 require 'tm/format/table'
 require 'tm/exceptions'
 
+require 'tm/string_extensions'
+
 module TM
 
 

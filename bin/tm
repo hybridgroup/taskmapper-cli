@@ -41,11 +41,12 @@ command :project do |c|
     'all' => TM::Commands::ListAllProjects,
     'first' => TM::Commands::FirstProject,
     'last' => TM::Commands::LastProject
+    'single' => TM::Commands::SingleProject
   }
   c.desc 'List projects'
   c.long_desc """
-  List projects possible arguments 'all', 'single'. Default 'all'.
-  You can use the --filter flag and use flags like --name, --created, --updated
+  List projects possible arguments 'all', 'single', 'first', 'last'. Default 'all'.
+  The single flag needs attributes to search for a particular project
   """
   c.default_value 'all'
   c.arg_name project_commands.keys.join("|")
@@ -59,12 +60,17 @@ command :project do |c|
   c.desc 'Disable color'
   c.switch 'no-color'
 
+  c.desc 'Attributes for --list=single. ex "name:ProjectName"'
+  c.flag 'search-attribute'
+
   c.action do |global_options, options, args| 
     Sickill::Rainbow.enabled = false if options[:'no-color'] 
     formatter = output_formats[options[:format]]
     command = project_commands[options[:list]]
-    command.new(TM::ProviderHandler.build_handler(global_options[:provider], 
-                                                        global_options[:authentication]), formatter).execute
+    search_attributes = options[:'search-attribute']
+    command.new(TM::ProviderHandler.build_handler(
+      global_options[:provider], 
+      global_options[:authentication]), formatter, search_attributes).execute
   end
 end
 

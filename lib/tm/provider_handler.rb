@@ -10,19 +10,10 @@ module TM
     end
 
     def self.build_handler(provider, authentication)
-      self.new(TaskMapper.new(provider.to_sym, format_authentication(authentication)))
+      self.new(TaskMapper.new(provider.to_sym, 
+                              authentication.extend(TM::StringExtensions).to_hash))
     rescue NameError
       raise TM::InvalidProvider, "Provider doesn't exists" 
-    end
-
-    private
-    def self.format_authentication(authentication)
-      res = authentication.split(/,/).inject({}) do |res, kv|
-        arg, val = kv.split(/:/)
-        res[arg] = val
-        res
-      end
-      res
     end
   end
 end
