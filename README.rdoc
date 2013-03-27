@@ -1,0 +1,51 @@
+= tm - Command line interface for TaskMapper[http://github.com/hybridgroup/taskmapper]
+
+Author:: Rafael George (mailto: george.rafael@gmail.com)
+Copyright:: Copyright (c) 2013 by Rafael George
+
+This application provides an easy to use interface to interact with any TaskMapper 
+provider in an standard way.
+
+= Install:
+
+  gem install tm
+
+Also it will be include with TaskMapper so no need to install it alone.
+
+== Use
+
+=== Authentication 
+
+  tm --provider kanbanpad --authentication 'token:kdkdjdkd,username:username' 
+
+Refer to particular providers documentation to know which fields they need for authentication.
+After using this mechanism for authentication is better to pass the `initconfig` command to not 
+be writing the credentials for each command. This will use the specified provider name as default.
+
+=== Project command
+
+==== List projects
+
+* Available options
+* --format=pretty|csv|table (Default: pretty)
+* --no-color 
+
+This is the default operation on projects. It will list all the projects for a given user. 
+
+  tm project --list=all
+
+  id: 1
+  name: Project
+  created_at: 2013-03-19T20:10:37Z
+  updated_at: 2013-03-21T02:53:53Z
+
+  tm project --list=all --format=csv
+
+  1, Project, 2013-03-19T20:10:37Z, 2013-03-21T02:53:53Z
+
+
+For more help 
+
+  tm help
+  tm help <command>
+
