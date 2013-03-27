@@ -1,10 +1,10 @@
 module TM
   module Commands
     class SingleProject
-      def initialize(provider_handler, formatter, attributes = {})
+      def initialize(provider_handler, formatter, attributes = '')
         @provider_handler = provider_handler
         @formatter = formatter
-        @attributes = attributes_to_hash
+        @attributes = attributes.extend(TM::StringExtensions).to_hash
       end
 
       def execute

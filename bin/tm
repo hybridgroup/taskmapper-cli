@@ -40,7 +40,7 @@ command :project do |c|
   project_commands = { 
     'all' => TM::Commands::ListAllProjects,
     'first' => TM::Commands::FirstProject,
-    'last' => TM::Commands::LastProject
+    'last' => TM::Commands::LastProject,
     'single' => TM::Commands::SingleProject
   }
   c.desc 'List projects'

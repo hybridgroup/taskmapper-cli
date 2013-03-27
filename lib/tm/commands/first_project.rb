@@ -1,7 +1,7 @@
 module TM
   module Commands
     class FirstProject
-      def initialize(provider_handler, formatter, attributes = {})
+      def initialize(provider_handler, formatter, attributes = '')
         @provider_handler = provider_handler
         @formatter = formatter
       end
