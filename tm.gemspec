@@ -3,11 +3,11 @@ require File.join([File.dirname(__FILE__),'lib','tm','version.rb'])
 spec = Gem::Specification.new do |s| 
   s.name = 'tm'
   s.version = Tm::VERSION
-  s.author = 'Your Name Here'
-  s.email = 'your@email.address.com'
-  s.homepage = 'http://your.website.com'
+  s.author = 'Rafael George'
+  s.email = 'george.rafael@gmail.com'
+  s.homepage = 'http://github.com/cored'
   s.platform = Gem::Platform::RUBY
-  s.summary = 'A description of your project'
+  s.summary = 'Command line interface for TaskMapper'
 # Add your other files here if you make them
   s.files = %w(
 bin/tm
@@ -22,6 +22,7 @@ lib/tm.rb
   s.executables << 'tm'
   s.add_dependency('taskmapper')
   s.add_dependency('taskmapper-kanbanpad')
+  s.add_dependency('taskmapper-github')
   s.add_dependency('rainbow')
   s.add_dependency('terminal-table')
 

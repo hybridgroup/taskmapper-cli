@@ -9,7 +9,7 @@ module TM
       def format(entity)
         entity.each_pair do |title, value|
           printf("%s: ", title.bright)
-          printf("%s\n", value.color(:green))
+          printf("%s\n", value.to_s.color(:green))
         end
       end
     end

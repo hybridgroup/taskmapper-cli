@@ -1,5 +1,6 @@
 require 'taskmapper'
 require 'taskmapper-kanbanpad'
+require 'taskmapper-github'
 
 module TM
   class ProviderHandler
