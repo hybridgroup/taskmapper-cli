@@ -32,16 +32,13 @@ be writing the credentials for each command. This will use the specified provide
 
 This is the default operation on projects. It will list all the projects for a given user. 
 
-  tm project --list=all
+  tm project --list=all --format=table
 
-  id: 1
-  name: Project
-  created_at: 2013-03-19T20:10:37Z
-  updated_at: 2013-03-21T02:53:53Z
+{<img src="http://dl.dropbox.com/u/576024/2013-03-27-173542_952x116_scrot.png" />}
 
-  tm project --list=all --format=csv
+  tm project --list=single --search-attribute='name:Project' 
 
-  1, Project, 2013-03-19T20:10:37Z, 2013-03-21T02:53:53Z
+{<img src="http://dl.dropbox.com/u/576024/2013-03-27-173642_842x113_scrot.png" />}
 
 
 For more help 
