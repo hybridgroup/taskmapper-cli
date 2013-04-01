@@ -54,8 +54,10 @@ Note: For the --project option you should send an attribute for the project to s
 ex. 'name:test-project'
 (Default --list=all)
 
-    tm task --project='name:test-project' 
+    tm task --project-attribute='name:test-project' 
 
+
+    tm task --list=first --project-attribute='name:test-project'
 
 For more help 
 
