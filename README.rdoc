@@ -26,11 +26,12 @@ be writing the credentials for each command. This will use the specified provide
 
 ==== List projects
 
-* Available options
+Available options
 * --format=pretty|csv|table (Default: pretty)
 * --no-color 
 
 This is the default operation on projects. It will list all the projects for a given user. 
+(Default: --list=all)
 
   tm project --list=all --format=table
 
@@ -39,6 +40,21 @@ http://dl.dropbox.com/u/576024/2013-03-27-173542_952x116_scrot.png
   tm project --list=single --search-attribute='name:Project' 
 
 http://dl.dropbox.com/u/576024/2013-03-27-173642_842x113_scrot.png"
+
+=== Task command
+
+==== List tasks
+
+Available options
+* --format=pretty|csv|table (Default: pretty)
+* --no-color
+
+This is the default operation on tasks. It will list all the tasks for a given project.
+Note: For the --project option you should send an attribute for the project to search, 
+ex. 'name:test-project'
+(Default --list=all)
+
+    tm task --project='name:test-project' 
 
 
 For more help 
