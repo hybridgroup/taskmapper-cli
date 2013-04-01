@@ -14,7 +14,6 @@ module TM
         tickets.each do |ticket|
           @formatter.format(ticket)
         end
-        @format.after 
       end
     end
   end

@@ -72,7 +72,7 @@ GEM
       activeresource (~> 3.0)
       activesupport (~> 3.0)
       hashie (~> 2.0)
-    taskmapper-github (0.11.2)
+    taskmapper-github (0.11.3)
       octokit
       taskmapper (~> 0.8)
     taskmapper-kanbanpad (0.8.1)
