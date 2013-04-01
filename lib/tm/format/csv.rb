@@ -1,11 +1,10 @@
 module TM
   module Format
     class CSV
-      def before(entity); end
-      def after; end
+      include Format
 
       def format(entity)
-        puts "#{entity.values.join(", ")}"
+        puts "#{normalize_entity(entity).values.join(", ")}"
       end
     end
   end

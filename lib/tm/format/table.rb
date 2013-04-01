@@ -3,13 +3,15 @@ require 'terminal-table'
 module TM
   module Format
     class Table
+      include Format
+
       def before(entity = {})
-        @@table = Terminal::Table.new :headings => entity.keys
+        @@table = Terminal::Table.new :headings => normalize_entity(entity).keys
         @@table.align_column(0, :right)
       end
 
       def format(entity)
-        @@table << entity.values
+        @@table << normalize_entity(entity).values
       end
 
       def after

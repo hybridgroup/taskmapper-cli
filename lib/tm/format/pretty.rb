@@ -3,11 +3,10 @@ require 'rainbow'
 module TM
   module Format
     class Pretty
-      def before(entity); end
-      def after; end
+      include Format
 
       def format(entity)
-        entity.each_pair do |title, value|
+        normalize_entity(entity).each_pair do |title, value|
           printf("%s: ", title.bright)
           printf("%s\n", value.to_s.color(:green))
         end
