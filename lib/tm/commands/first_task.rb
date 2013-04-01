@@ -1,6 +1,6 @@
 module TM
   module Commands
-    class ListAllTasks
+    class FirstTask 
       def initialize(provider_handler, formatter, attributes = '')
         @provider_handler = provider_handler
         @formatter = formatter
@@ -9,11 +9,9 @@ module TM
 
       def execute
         project = @provider_handler.taskmapper.project(@attributes)
-        tickets = project.tickets
-        @formatter.before(tickets.first)
-        tickets.each do |ticket|
-          @formatter.format(ticket)
-        end
+        ticket = project.tickets.first
+        @formatter.before(ticket)
+        @formatter.format(ticket)
         @formatter.after
       end
     end

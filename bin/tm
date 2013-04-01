@@ -78,9 +78,11 @@ end
 desc 'Manage iteration with tickets, depends on a project name'
 command :task do |c|
   ticket_commands = { 
-    'all' => TM::Commands::ListAllTasks
+    'all' => TM::Commands::ListAllTasks,
+    'first' => TM::Commands::FirstTask
   }
   c.desc 'Name of the project to execute tickets operations on'
+  c.arg_name 'name:test-project'
   c.flag 'project-attribute'
 
   c.desc 'List tickets'
