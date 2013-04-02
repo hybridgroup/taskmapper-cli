@@ -13,3 +13,5 @@ RSpec.configure do |config|
   config.formatter = 'documentation'
   config.color_enabled = true
 end
+
+Dir["./spec/support/**/*.rb"].sort.each {|f| require f}

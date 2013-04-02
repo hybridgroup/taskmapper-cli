@@ -1,10 +1,11 @@
 module TM
   module Commands
-    class SingleProject < Command
+    class LastTask < Command
       def execute
         project = @provider_handler.taskmapper.project(@attributes)
-        @formatter.before(project)
-        @formatter.format(project)
+        ticket = project.tickets.last
+        @formatter.before(ticket)
+        @formatter.format(ticket)
         @formatter.after
       end
     end

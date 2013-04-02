@@ -1,11 +1,6 @@
 module TM
   module Commands
-    class FirstProject
-      def initialize(provider_handler, formatter, attributes = '')
-        @provider_handler = provider_handler
-        @formatter = formatter
-      end
-
+    class FirstProject < Command
       def execute
         project = @provider_handler.taskmapper.projects.first
         @formatter.before(project)

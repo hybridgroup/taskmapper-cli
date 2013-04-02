@@ -1,12 +1,6 @@
 module TM
   module Commands
-    class ListAllTasks
-      def initialize(provider_handler, formatter, attributes = '')
-        @provider_handler = provider_handler
-        @formatter = formatter
-        @attributes = attributes.extend(TM::StringExtensions).to_hash
-      end
-
+    class ListAllTasks < Command
       def execute
         project = @provider_handler.taskmapper.project(@attributes)
         tickets = project.tickets
