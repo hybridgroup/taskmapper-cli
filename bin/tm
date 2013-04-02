@@ -80,7 +80,8 @@ command :task do |c|
   ticket_commands = { 
     'all' => TM::Commands::ListAllTasks,
     'first' => TM::Commands::FirstTask,
-    'last' => TM::Commands::LastTask
+    'last' => TM::Commands::LastTask,
+    'single' => TM::Commands::SingleTask
   }
   c.desc 'Name of the project to execute tickets operations on'
   c.arg_name 'name:test-project'
@@ -99,6 +100,9 @@ command :task do |c|
   c.default_value 'pretty'
   c.flag :format
 
+  c.desc 'Attributes for --list=single. ex "name:TaskName"'
+  c.flag 'search-attribute'
+
   c.desc 'Disable color'
   c.switch 'no-color'
 
@@ -108,7 +112,10 @@ command :task do |c|
     command = ticket_commands[options[:list]]
     command.new(TM::ProviderHandler.build_handler(
       global_options[:provider],
-      global_options[:authentication]), formatter, options[:'project-attribute']).execute
+      global_options[:authentication]), 
+      formatter, 
+      options[:'project-attribute'], 
+               options[:'serach-attribute']).execute
   end
 end
 
