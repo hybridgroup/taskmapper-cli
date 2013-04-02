@@ -87,9 +87,9 @@ command :task do |c|
   c.arg_name 'name:test-project'
   c.flag 'project-attribute'
 
-  c.desc 'List tickets'
+  c.desc 'List tasks'
   c.long_desc """
-  List ticktes possible arguments 'all'. Default 'all'.
+  List tasks possible arguments 'all', 'first', 'last', 'single'. Default 'all'.
   """
   c.default_value 'all'
   c.arg_name ticket_commands.keys.join("|")
@@ -115,7 +115,7 @@ command :task do |c|
       global_options[:authentication]), 
       formatter, 
       options[:'project-attribute'], 
-               options[:'serach-attribute']).execute
+               options[:'search-attribute']).execute
   end
 end
 
