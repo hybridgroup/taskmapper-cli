@@ -1,13 +1,7 @@
 module TM
   module Commands
-    class FirstTask 
-      def initialize(provider_handler, formatter, attributes = '')
-        @provider_handler = provider_handler
-        @formatter = formatter
-        @attributes = attributes.extend(TM::StringExtensions).to_hash
-      end
-
-      def execute
+    class FirstTask < Command
+      def execute(search_attrs = '')
         project = @provider_handler.taskmapper.project(@attributes)
         ticket = project.tickets.first
         @formatter.before(ticket)

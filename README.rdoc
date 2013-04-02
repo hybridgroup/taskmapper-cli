@@ -56,8 +56,19 @@ ex. 'name:test-project'
 
     tm task --project-attribute='name:test-project' 
 
+http://dl.dropbox.com/u/576024/2013-04-02-164829_1099x269_scrot.png
 
     tm task --list=first --project-attribute='name:test-project'
+
+http://dl.dropbox.com/u/576024/2013-04-02-165558_976x133_scrot.png
+
+    tm task --list=last --project-attribute='name:test-project'
+
+http://dl.dropbox.com/u/576024/2013-04-02-165840_1011x124_scrot.png
+
+    tm task --list=single --project-attribute='name:test-project' --search-attribute='title:test-task'
+
+http://dl.dropbox.com/u/576024/2013-04-02-170111_950x124_scrot.png
 
 For more help 
 
