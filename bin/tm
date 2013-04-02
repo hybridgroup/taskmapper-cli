@@ -114,8 +114,7 @@ command :task do |c|
       global_options[:provider],
       global_options[:authentication]), 
       formatter, 
-      options[:'project-attribute'], 
-               options[:'search-attribute']).execute
+      options[:'project-attribute']).execute(options[:'search-attribute'])
   end
 end
 

@@ -1,7 +1,7 @@
 module TM
   module Commands
     class ListAllTasks < Command
-      def execute
+      def execute(search_attrs = '')
         project = @provider_handler.taskmapper.project(@attributes)
         tickets = project.tickets
         @formatter.before(tickets.first)
