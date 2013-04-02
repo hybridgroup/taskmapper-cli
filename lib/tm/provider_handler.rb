@@ -1,6 +1,19 @@
 require 'taskmapper'
 require 'taskmapper-kanbanpad'
 require 'taskmapper-github'
+require 'taskmapper-basecamp'
+require 'taskmapper-bugherd' 
+require 'taskmapper-bugzilla'
+require 'taskmapper-fogbugz'
+require 'taskmapper-github' 
+require 'taskmapper-kanbanpad'
+require 'taskmapper-lighthouse'
+require 'taskmapper-pivotal' 
+require 'taskmapper-rally' 
+require 'taskmapper-redmine'
+require 'taskmapper-trac' 
+require 'taskmapper-unfuddle'
+require 'taskmapper-zendesk' 
 
 module TM
   class ProviderHandler
