@@ -17,6 +17,8 @@ require 'tm/commands/last_task'
 require 'tm/commands/single_task'
 
 # Formatters
+require 'tm/commands/list_all_comments_for_task'
+
 require 'tm/format/format'
 require 'tm/format/csv'
 require 'tm/format/pretty'
