@@ -140,7 +140,7 @@ GEM
       rake (~> 0.9)
       ruby-fogbugz (~> 0.1)
       taskmapper (~> 0.7)
-    taskmapper-github (0.11.3)
+    taskmapper-github (0.11.4)
       octokit
       taskmapper (~> 0.8)
     taskmapper-kanbanpad (0.8.1)

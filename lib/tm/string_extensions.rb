@@ -4,7 +4,7 @@ module TM
       return '' if self.nil?
       self.split(/,/).inject({}) do |hash, kv|
         arg, val = kv.split(/:/)
-        hash[arg] = val
+        hash[arg.to_sym] = val
         hash 
       end
     end
