@@ -5,8 +5,10 @@ module TM
         project = @provider_handler.taskmapper.project(@attributes)
         ticket = project.tickets(search_attrs.extend(TM::StringExtensions).to_hash).first
         comments = ticket.comments
-        @formatter.before(comments)
-        @formatter.format(comments)
+        @formatter.before(comments.first)
+        comments.each do |comment|
+          @formatter.format(comment)
+        end
         @formatter.after
       end
     end

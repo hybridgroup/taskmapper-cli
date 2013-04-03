@@ -28,7 +28,7 @@ config_file File.join(ENV['HOME'], '.taskmapper.rc.yml')
 version Tm::VERSION
 
 desc 'Provider name'
-arg_name "kanbanpad, github, etc"
+arg_name "ex. kanbanpad, github, etc"
 flag [:p, :provider]
 
 desc 'Authentication for provider' 
@@ -83,6 +83,7 @@ command :task do |c|
     'last' => TM::Commands::LastTask,
     'single' => TM::Commands::SingleTask
   }
+
   c.desc 'Name of the project to execute tickets operations on'
   c.arg_name 'name:test-project'
   c.flag 'project-attribute'
@@ -110,6 +111,47 @@ command :task do |c|
     Sickill::Rainbow.enabled = false if options[:'no-color']
     formatter = output_formats[options[:format]]
     command = ticket_commands[options[:list]]
+    command.new(TM::ProviderHandler.build_handler(
+      global_options[:provider],
+      global_options[:authentication]), 
+      formatter, 
+      options[:'project-attribute']).execute(options[:'search-attribute'])
+  end
+end
+
+desc 'Manage iteration with comments, depends on a project and task'
+command :comment do |c|
+  comment_commands = { 
+    'all' => TM::Commands::ListAllCommentsForTask
+  }
+
+  c.desc 'Name of the project to execute comments operations on'
+  c.arg_name 'name:test-project'
+  c.flag 'project-attribute'
+
+  c.desc 'List tasks'
+  c.long_desc """
+  List tasks possible arguments 'all'.
+  """
+  c.default_value 'all'
+  c.arg_name comment_commands.keys.join("|")
+  c.flag [:l, :list]
+
+  c.desc 'Format of the output'
+  c.arg_name output_formats.keys.join("|")
+  c.default_value 'pretty'
+  c.flag :format
+
+  c.desc 'Use to find the task to search for comments Ex. "name:TaskName"'
+  c.flag 'search-attribute'
+
+  c.desc 'Disable color'
+  c.switch 'no-color'
+
+  c.action do |global_options, options, args| 
+    Sickill::Rainbow.enabled = false if options[:'no-color']
+    formatter = output_formats[options[:format]]
+    command = comment_commands[options[:list]]
     command.new(TM::ProviderHandler.build_handler(
       global_options[:provider],
       global_options[:authentication]), 
