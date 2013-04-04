@@ -6,10 +6,13 @@ end
 
 describe TM::Format do 
   let(:project) do 
-    {'id' => 1, 'name' => 'test-project', 'description' => 'my test project', 'dummy' => 'info' }
+    {'dump' => 2, 'id' => 1, 'name' => 'test-project', 'description' => 'my test project', 'dummy' => 'info' }
   end
   let(:ticket) do 
-    {'id' => 1, 'title' => 'Found a bug', 'state' => 'open', 'body' => 'Having problems', 'status' => 'open'}
+    {'dump' => 2, 'id' => 1, 'title' => 'Found a bug', 'state' => 'open', 'description' => 'Having problems', 'status' => 'open'}
+  end
+  let(:comment) do 
+    {'dump' => 2, 'id' => 1, 'author' => 'me', 'body' => 'here'}
   end
 
   describe "when entity is a project" do 
@@ -22,8 +25,14 @@ describe TM::Format do
   describe "when entity is a ticket" do 
     context :normalize_entity do 
       subject { DummyFormat.new.normalize_entity(ticket) }
-      it { should == {'id' => 1, 'title' => 'Found a bug', 'status' => 'open'} }
+      it { should == {'id' => 1, 'title' => 'Found a bug', 'description' => 'Having problems', 'status' => 'open'} }
     end
   end
 
+  describe "when entity is a comment" do 
+    context :normalize_entry do 
+      subject { DummyFormat.new.normalize_entity(comment) }
+      it { should == {'id' => 1, 'author' => 'me', 'body' => 'here'} }
+    end
+  end
 end
