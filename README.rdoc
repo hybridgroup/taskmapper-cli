@@ -47,7 +47,8 @@ Available options
 * --no-color
 
 This is the default operation on tasks. It will list all the tasks for a given project.
-Note: For the --project option you should send an attribute for the project to search, 
+
+Note: For the --project-attribute option you should send an attribute for the project to search, 
 ex. 'name:test-project'
 (Default --list=all)
 
@@ -66,6 +67,25 @@ http://dl.dropbox.com/u/576024/2013-04-02-165840_1011x124_scrot.png
     tm task --list=single --project-attribute='name:test-project' --search-attribute='title:test-task'
 
 http://dl.dropbox.com/u/576024/2013-04-02-170111_950x124_scrot.png
+
+=== Comment command
+
+==== List comments
+
+Available options 
+* --format=pretty|csv|table (Default: pretty)
+* --no-color
+
+This is the default operation on comments. It will list all the comments for a given task.
+
+Note: This command is dependant of two other options, --project-attribute and --task-attribute.
+The --project-attribute is the same as the task command, it's needed to figure out which project
+the command will execute upon, the --task-attribute is needed to figure out on which particular task
+the user will retrieve the comments. (ex. 'title:test-task') 
+
+      tm comment --project-attribute='name:test-project' --task-attribute='title:test-task'
+
+http://dl.dropbox.com/u/576024/2013-04-04-143242_1196x148_scrot.png
 
 For more help 
 

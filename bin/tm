@@ -143,7 +143,7 @@ command :comment do |c|
   c.flag :format
 
   c.desc 'Use to find the task to search for comments Ex. "name:TaskName"'
-  c.flag 'search-attribute'
+  c.flag 'task-attribute'
 
   c.desc 'Disable color'
   c.switch 'no-color'
@@ -156,7 +156,7 @@ command :comment do |c|
       global_options[:provider],
       global_options[:authentication]), 
       formatter, 
-      options[:'project-attribute']).execute(options[:'search-attribute'])
+      options[:'project-attribute']).execute(options[:'task-attribute'])
   end
 end
 
