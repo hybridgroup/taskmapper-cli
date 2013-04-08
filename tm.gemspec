@@ -1,7 +1,7 @@
 # Ensure we require the local version and not one we might have installed already
 require File.join([File.dirname(__FILE__),'lib','tm','version.rb'])
 spec = Gem::Specification.new do |s| 
-  s.name = 'tm'
+  s.name = 'taskmapper-cli'
   s.version = Tm::VERSION
   s.author = 'Rafael George'
   s.email = 'george.rafael@gmail.com'
