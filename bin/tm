@@ -42,7 +42,11 @@ command :generate do |c|
   c.flag 'provider-name'
 
   c.action do |global_options, options, args| 
-    TM::Commands::GenerateProvider.create(options[:'provider-name'])
+    if options[:'provider-name']
+      TM::Commands::GenerateProvider.create(options[:'provider-name'])
+    else
+      puts "Please specified a provider name with --provider-name option"
+    end
   end
 end
 
@@ -192,8 +196,8 @@ command :comment do |c|
         global_options[:authentication]),
         formatter,
         options[:'project-attribute']).execute(
-                    options[:'task-attribute'],
-                    options[:'comment-attribute'])
+        options[:'task-attribute'],
+        options[:'comment-attribute'])
     end
   end
 end
