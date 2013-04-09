@@ -35,6 +35,17 @@ desc 'Authentication for provider'
 arg_name "'token:password, username:user'"
 flag [:a, :authentication]
 
+desc 'Generate provider skeleton' 
+arg_name 'Command for generating a taskmapper provider skeleton' 
+command :generate do |c|
+  c.desc 'Provider name'
+  c.flag 'provider-name'
+
+  c.action do |global_options, options, args| 
+    TM::Commands::GenerateProvider.create(options[:'provider-name'])
+  end
+end
+
 desc 'Manage iteration with projects' 
 arg_name 'Command for managing projects' 
 command :project do |c|
