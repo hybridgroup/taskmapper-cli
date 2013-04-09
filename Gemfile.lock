@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    taskmapper-cli (0.0.1)
+    taskmapper-cli (0.0.2)
       gli (= 2.5.5)
       rainbow
       taskmapper
