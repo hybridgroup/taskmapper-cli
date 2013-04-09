@@ -64,9 +64,18 @@ http://dl.dropbox.com/u/576024/2013-04-02-165558_976x133_scrot.png
 
 http://dl.dropbox.com/u/576024/2013-04-02-165840_1011x124_scrot.png
 
-    tm task --list=single --project-attribute='name:test-project' --search-attribute='title:test-task'
+    tm task --list=single --project-attribute='name:test-project' --task-attribute='title:test-task'
 
 http://dl.dropbox.com/u/576024/2013-04-02-170111_950x124_scrot.png
+
+==== Create task
+
+This particular needs needs --project-attribute and --task-attribute to work on an existing
+project and task respectevily.
+
+    tm task --project-attribute='name:test-project' --task-attribute='title:testing' --create-task
+
+http://dl.dropbox.com/u/576024/2013-04-09-102245_1304x162_scrot.png
 
 === Comment command
 
