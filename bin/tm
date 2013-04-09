@@ -131,7 +131,7 @@ end
 
 desc 'Manage iteration with comments, depends on a project and task'
 command :comment do |c|
-  comment_commands = { 
+  comment_read_commands = { 
     'all' => TM::Commands::ListAllCommentsForTask
   }
 
@@ -144,13 +144,19 @@ command :comment do |c|
   List tasks possible arguments 'all'.
   """
   c.default_value 'all'
-  c.arg_name comment_commands.keys.join("|")
+  c.arg_name comment_read_commands.keys.join("|")
   c.flag [:l, :list]
 
   c.desc 'Format of the output'
   c.arg_name output_formats.keys.join("|")
   c.default_value 'pretty'
   c.flag :format
+
+  c.desc 'Create a comment' 
+  c.switch 'create-comment'
+
+  c.desc 'Comment attribute for creation'
+  c.flag 'comment-attribute'
 
   c.desc 'Use to find the task to search for comments Ex. "name:TaskName"'
   c.flag 'task-attribute'
@@ -161,12 +167,23 @@ command :comment do |c|
   c.action do |global_options, options, args| 
     Sickill::Rainbow.enabled = false if options[:'no-color']
     formatter = output_formats[options[:format]]
-    command = comment_commands[options[:list]]
-    command.new(TM::ProviderHandler.build_handler(
-      global_options[:provider],
-      global_options[:authentication]), 
-      formatter, 
-      options[:'project-attribute']).execute(options[:'task-attribute'])
+    unless options[:'create-comment']
+      command = comment_read_commands[options[:list]]
+
+      command.new(TM::ProviderHandler.build_handler(
+        global_options[:provider],
+        global_options[:authentication]), 
+        formatter, 
+        options[:'project-attribute']).execute(options[:'task-attribute'])
+    else
+      TM::Commands::CreateComment.new(TM::ProviderHandler.build_handler(
+        global_options[:provider],
+        global_options[:authentication]),
+        formatter,
+        options[:'project-attribute']).execute(
+                    options[:'task-attribute'],
+                    options[:'comment-attribute'])
+    end
   end
 end
 

@@ -16,6 +16,7 @@ require 'tm/commands/first_task'
 require 'tm/commands/last_task'
 require 'tm/commands/single_task'
 require 'tm/commands/create_task'
+require 'tm/commands/create_comment'
 
 # Formatters
 require 'tm/commands/list_all_comments_for_task'

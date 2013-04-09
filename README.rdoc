@@ -87,6 +87,14 @@ the user will retrieve the comments. (ex. 'title:test-task')
 
 http://dl.dropbox.com/u/576024/2013-04-04-143242_1196x148_scrot.png
 
+==== Create comments
+
+This command needs three mandatory options --project-attribute, --task-attribute and --comment-attribute. 
+
+    tm comment --project-attribute='name:test-project --task-attribute='title:test-task' --command-attribute='body:testing' --create-comment
+
+http://dl.dropbox.com/u/576024/2013-04-09-102018_1354x161_scrot.png
+
 For more help 
 
   tm help
