@@ -12,6 +12,26 @@ spec = Gem::Specification.new do |s|
   s.files = %w(
 bin/tm
 lib/tm/version.rb
+lib/tm/string_extensions.rb
+lib/tm/exceptions.rb
+lib/tm/provider_handler.rb
+lib/tm/format/format.rb
+lib/tm/format/csv.rb
+lib/tm/format/pretty.rb
+lib/tm/format/table.rb
+lib/tm/commands/command.rb
+lib/tm/commands/create_comment.rb
+lib/tm/commands/create_task.rb
+lib/tm/commands/first_project.rb
+lib/tm/commands/first_task.rb
+lib/tm/commands/generate_provider.rb
+lib/tm/commands/last_project.rb
+lib/tm/commands/last_task.rb
+lib/tm/commands/list_all_comments_for_task.rb
+lib/tm/commands/list_all_projects.rb
+lib/tm/commands/list_all_tasks.rb
+lib/tm/commands/single_project.rb
+lib/tm/commands/single_task.rb
 lib/tm.rb
   )
   s.require_paths << 'lib'

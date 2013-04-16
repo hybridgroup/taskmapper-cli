@@ -1,4 +1,6 @@
-require_relative '../lib/tm' 
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'tm'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

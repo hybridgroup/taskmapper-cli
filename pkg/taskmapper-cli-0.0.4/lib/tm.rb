@@ -1,33 +1,33 @@
-require 'tm/version.rb'
+require_relative 'tm/version.rb'
 
-require 'tm/string_extensions'
+require_relative 'tm/string_extensions'
 
 # Taskmapper provider handler 
-require 'tm/provider_handler'
+require_relative 'tm/provider_handler'
 
 # Commands
-require 'tm/commands/command'
-require 'tm/commands/list_all_projects'
-require 'tm/commands/first_project'
-require 'tm/commands/last_project'
-require 'tm/commands/single_project'
-require 'tm/commands/list_all_tasks'
-require 'tm/commands/first_task'
-require 'tm/commands/last_task'
-require 'tm/commands/single_task'
-require 'tm/commands/create_task'
-require 'tm/commands/create_comment'
-require 'tm/commands/generate_provider'
+require_relative 'tm/commands/command'
+require_relative 'tm/commands/list_all_projects'
+require_relative 'tm/commands/first_project'
+require_relative 'tm/commands/last_project'
+require_relative 'tm/commands/single_project'
+require_relative 'tm/commands/list_all_tasks'
+require_relative 'tm/commands/first_task'
+require_relative 'tm/commands/last_task'
+require_relative 'tm/commands/single_task'
+require_relative 'tm/commands/create_task'
+require_relative 'tm/commands/create_comment'
+require_relative 'tm/commands/generate_provider'
 
 # Formatters
-require 'tm/commands/list_all_comments_for_task'
+require_relative 'tm/commands/list_all_comments_for_task'
 
-require 'tm/format/format'
-require 'tm/format/csv'
-require 'tm/format/pretty'
-require 'tm/format/table'
+require_relative 'tm/format/format'
+require_relative 'tm/format/csv'
+require_relative 'tm/format/pretty'
+require_relative 'tm/format/table'
 
-require 'tm/exceptions'
+require_relative 'tm/exceptions'
 
 module TM
 
