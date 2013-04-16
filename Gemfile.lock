@@ -1,10 +1,11 @@
 PATH
   remote: .
   specs:
-    taskmapper-cli (0.0.3)
+    taskmapper-cli (0.0.4)
       gli (= 2.5.5)
       rainbow
-      taskmapper (= 1.0.1)
+      taskmapper
+      taskmapper-basecamp
       taskmapper-bugherd
       taskmapper-bugzilla
       taskmapper-fogbugz
@@ -16,6 +17,7 @@ PATH
       taskmapper-redmine
       taskmapper-trac
       taskmapper-unfuddle
+      taskmapper-zendesk
       terminal-table
 
 GEM
@@ -35,6 +37,10 @@ GEM
       childprocess (~> 0.3.6)
       cucumber (>= 1.1.1)
       rspec-expectations (>= 2.7.0)
+    basecamp (0.0.9)
+      activeresource (>= 2.3.0)
+      oauth2
+      xml-simple
     bugherd-api (0.0.3)
       activeresource
       activesupport
@@ -62,6 +68,7 @@ GEM
     grancher (0.1.5)
       gash
     hashie (2.0.3)
+    httpauth (0.2.0)
     i18n (0.6.1)
     jeweler (1.8.4)
       bundler (~> 1.0)
@@ -69,13 +76,23 @@ GEM
       rake
       rdoc
     json (1.7.7)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     lighthouse-api (2.0)
       activeresource (>= 3.0.0)
       activesupport (>= 3.0.0)
     multi_json (1.7.2)
+    multi_xml (0.5.3)
     multipart-post (1.2.0)
     netrc (0.7.7)
     nokogiri (1.5.9)
+    oauth2 (0.9.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
     octokit (1.24.0)
       addressable (~> 2.2)
       faraday (~> 0.8)
@@ -84,6 +101,7 @@ GEM
       multi_json (~> 1.3)
       netrc (~> 0.7.7)
     open4 (1.3.0)
+    rack (1.5.2)
     rainbow (1.1.4)
     rake (10.0.4)
     rally_rest_api (1.0.6)
@@ -107,6 +125,9 @@ GEM
       activeresource (~> 3.0)
       activesupport (~> 3.0)
       hashie (~> 2.0)
+    taskmapper-basecamp (0.7.2)
+      basecamp
+      taskmapper (~> 1.0)
     taskmapper-bugherd (0.2.0)
       bugherd-api
       taskmapper
@@ -142,6 +163,8 @@ GEM
       trac4r (~> 1.2)
     taskmapper-unfuddle (0.8.0)
       addressable
+      taskmapper
+    taskmapper-zendesk (0.7.0)
       taskmapper
     terminal-table (1.4.5)
     trac4r (1.2.4)

@@ -1,0 +1,226 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__) + '/../lib')
+require 'gli'
+require 'tm'
+
+include TM
+
+begin # XXX: Remove this begin/rescue before distributing your app
+  require 'tm'
+rescue LoadError
+  STDERR.puts "In development, you need to use `bundle exec bin/tm` to run your app"
+  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
+  STDERR.puts "Feel free to remove this message from bin/tm now"
+  exit 64
+end
+
+include GLI::App
+
+output_formats = {
+  'csv' => TM::Format::CSV.new,
+  'pretty' => TM::Format::Pretty.new, 
+  'table' => TM::Format::Table.new
+}
+
+program_desc 'Command line interface for Taskmapper'
+config_file File.join(ENV['HOME'], '.taskmapper.rc.yml')
+
+version Tm::VERSION
+
+desc 'Provider name'
+arg_name "ex. kanbanpad, github, etc"
+flag [:p, :provider]
+
+desc 'Authentication for provider' 
+arg_name "'token:password, username:user'"
+flag [:a, :authentication]
+
+desc 'Generate provider skeleton' 
+arg_name 'Command for generating a taskmapper provider skeleton' 
+command :generate do |c|
+  c.desc 'Provider name'
+  c.flag 'provider-name'
+
+  c.action do |global_options, options, args| 
+    if options[:'provider-name']
+      TM::Commands::GenerateProvider.create(options[:'provider-name'])
+    else
+      puts "Please specified a provider name with --provider-name option"
+    end
+  end
+end
+
+desc 'Manage iteration with projects' 
+arg_name 'Command for managing projects' 
+command :project do |c|
+  project_commands = { 
+    'all' => TM::Commands::ListAllProjects,
+    'first' => TM::Commands::FirstProject,
+    'last' => TM::Commands::LastProject,
+    'single' => TM::Commands::SingleProject
+  }
+  c.desc 'List projects'
+  c.long_desc """
+  List projects possible arguments 'all', 'single', 'first', 'last'. Default 'all'.
+  The single flag needs attributes to search for a particular project
+  """
+  c.default_value 'all'
+  c.arg_name project_commands.keys.join("|")
+  c.flag [:l, :list]
+
+  c.desc 'Format of the output'
+  c.arg_name output_formats.keys.join("|")
+  c.default_value 'pretty'
+  c.flag :format
+
+  c.desc 'Disable color'
+  c.switch 'no-color'
+
+  c.desc 'Attributes for --list=single. ex "name:ProjectName"'
+  c.flag 'search-attribute'
+
+  c.action do |global_options, options, args| 
+    Sickill::Rainbow.enabled = false if options[:'no-color'] 
+    formatter = output_formats[options[:format]]
+    command = project_commands[options[:list]]
+    search_attributes = options[:'search-attribute']
+    command.new(TM::ProviderHandler.build_handler(
+      global_options[:provider], 
+      global_options[:authentication]), formatter, search_attributes).execute
+  end
+end
+
+desc 'Manage iteration with tickets, depends on a project name'
+command :task do |c|
+  task_read_commands = { 
+    'all' => TM::Commands::ListAllTasks,
+    'first' => TM::Commands::FirstTask,
+    'last' => TM::Commands::LastTask,
+    'single' => TM::Commands::SingleTask
+  }
+
+  c.desc 'Name of the project to execute tickets operations on'
+  c.arg_name 'name:test-project'
+  c.flag 'project-attribute'
+
+  c.desc 'List tasks'
+  c.long_desc """
+  List tasks possible arguments 'all', 'first', 'last', 'single'. Default 'all'.
+  """
+  c.default_value 'all'
+  c.arg_name task_read_commands.keys.join("|")
+  c.flag [:l, :list]
+
+  c.desc 'Create task'
+  c.long_desc """
+  Create tasks for a given project
+  """
+  c.switch 'create-task'
+
+  c.desc 'Format of the output'
+  c.arg_name output_formats.keys.join("|")
+  c.default_value 'pretty'
+  c.flag :format
+
+  c.desc 'Attributes for --list=single. ex "name:TaskName"'
+  c.flag 'task-attribute'
+
+  c.desc 'Disable color'
+  c.switch 'no-color'
+
+  c.action do |global_options, options, args| 
+    Sickill::Rainbow.enabled = false if options[:'no-color']
+    formatter = output_formats[options[:format]]
+    unless options[:'create-task']
+      command = task_read_commands[options[:list]] 
+    else
+      command = TM::Commands::CreateTask
+    end
+    command.new(TM::ProviderHandler.build_handler(
+      global_options[:provider],
+      global_options[:authentication]), 
+      formatter, 
+      options[:'project-attribute']).execute(options[:'task-attribute'])
+  end
+end
+
+desc 'Manage iteration with comments, depends on a project and task'
+command :comment do |c|
+  comment_read_commands = { 
+    'all' => TM::Commands::ListAllCommentsForTask
+  }
+
+  c.desc 'Name of the project to execute comments operations on'
+  c.arg_name 'name:test-project'
+  c.flag 'project-attribute'
+
+  c.desc 'List tasks'
+  c.long_desc """
+  List tasks possible arguments 'all'.
+  """
+  c.default_value 'all'
+  c.arg_name comment_read_commands.keys.join("|")
+  c.flag [:l, :list]
+
+  c.desc 'Format of the output'
+  c.arg_name output_formats.keys.join("|")
+  c.default_value 'pretty'
+  c.flag :format
+
+  c.desc 'Create a comment' 
+  c.switch 'create-comment'
+
+  c.desc 'Comment attribute for creation'
+  c.flag 'comment-attribute'
+
+  c.desc 'Use to find the task to search for comments Ex. "name:TaskName"'
+  c.flag 'task-attribute'
+
+  c.desc 'Disable color'
+  c.switch 'no-color'
+
+  c.action do |global_options, options, args| 
+    Sickill::Rainbow.enabled = false if options[:'no-color']
+    formatter = output_formats[options[:format]]
+    unless options[:'create-comment']
+      command = comment_read_commands[options[:list]]
+
+      command.new(TM::ProviderHandler.build_handler(
+        global_options[:provider],
+        global_options[:authentication]), 
+        formatter, 
+        options[:'project-attribute']).execute(options[:'task-attribute'])
+    else
+      TM::Commands::CreateComment.new(TM::ProviderHandler.build_handler(
+        global_options[:provider],
+        global_options[:authentication]),
+        formatter,
+        options[:'project-attribute']).execute(
+        options[:'task-attribute'],
+        options[:'comment-attribute'])
+    end
+  end
+end
+
+pre do |global,command,options,args|
+  # Pre logic here
+  # Return true to proceed; false to abort and not call the
+  # chosen command
+  # Use skips_pre before a command to skip this block
+  # on that command only
+  true
+end
+
+post do |global,command,options,args|
+  # Post logic here
+  # Use skips_post before a command to skip this
+  # block on that command only
+end
+
+on_error do |exception|
+  # Error logic here
+  # return false to skip default error handling
+  true
+end
+
+exit run(ARGV)

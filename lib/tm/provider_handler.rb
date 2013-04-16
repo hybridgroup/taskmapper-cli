@@ -25,7 +25,7 @@ module TM
 
     def self.build_handler(provider, authentication)
       self.new(TaskMapper.new(provider.to_sym, 
-                              authentication.to_hash))
+                              authentication.extend(TM::StringExtensions).to_hash))
     rescue NameError
       raise TM::InvalidProvider, "Provider doesn't exists" 
     end

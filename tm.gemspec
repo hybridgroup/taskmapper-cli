@@ -20,7 +20,8 @@ lib/tm.rb
   s.rdoc_options << '--title' << 'tm' << '--main' << 'README.rdoc' << '-ri'
   s.bindir = 'bin'
   s.executables << 'tm'
-  s.add_dependency('taskmapper', '1.0.1')
+  s.add_dependency('taskmapper')
+  s.add_dependency('taskmapper-basecamp')
   s.add_dependency('taskmapper-github')
   s.add_dependency('taskmapper-bugherd')
   s.add_dependency('taskmapper-bugzilla')
@@ -32,6 +33,7 @@ lib/tm.rb
   s.add_dependency('taskmapper-redmine')
   s.add_dependency('taskmapper-trac')
   s.add_dependency('taskmapper-unfuddle')
+  s.add_dependency('taskmapper-zendesk')
 
   s.add_dependency('rainbow')
   s.add_dependency('terminal-table')
