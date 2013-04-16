@@ -1,5 +1,0 @@
-= tm
-
-Generate this with
-    tm rdoc
-After you have described your command line interface
